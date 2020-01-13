@@ -85,9 +85,8 @@ const isFoodEatenBySnake = (snakeLocation, foodLocation) => {
 };
 
 class Game {
-  constructor(snake, ghostSnake, food) {
+  constructor(snake, food) {
     this.snake = snake;
-    this.ghostSnake = ghostSnake;
     this.food = food;
   }
 
@@ -180,20 +179,10 @@ const initSnake = () => {
   return new Snake(snakePosition, new Direction(EAST), 'snake');
 };
 
-const initGhostSnake = () => {
-  const ghostSnakePosition = [
-    [40, 30],
-    [41, 30],
-    [42, 30]
-  ];
-  return new Snake(ghostSnakePosition, new Direction(SOUTH), 'ghost');
-};
-
 const setup = game => {
   attachEventListeners(game);
   createGrids();
   drawSnake(game.snake);
-  drawSnake(game.ghostSnake);
   drawFood(game.food);
 };
 
@@ -201,20 +190,11 @@ const runGame = game => {
   moveAndDrawSnake(game);
 };
 
-const randomlyTurnSnake = snake => {
-  let x = Math.random() * 100;
-  if (x > 50) {
-    snake.turnLeft();
-  }
-};
-
 const main = function() {
   const snake = initSnake();
-  const ghostSnake = initGhostSnake();
   const food = new Food(55, 25, [0, 0]);
-  const game = new Game(snake, ghostSnake, food);
+  const game = new Game(snake, food);
   setup(game);
 
   setInterval(runGame, 50, game);
-  setInterval(randomlyTurnSnake, 200, ghostSnake);
 };
