@@ -1,11 +1,5 @@
 'use strict';
 
-const isHeadOutOfBoundary = function([headX, headY]) {
-  const isHeadXOutOfCols = headX < 0 || headX >= NUM_OF_COLS;
-  const isHeadYOutOfRows = headY < 0 || headY >= NUM_OF_ROWS;
-  return isHeadXOutOfCols || isHeadYOutOfRows;
-};
-
 class Snake {
   constructor(positions, direction, type) {
     this.positions = positions.slice();
@@ -22,6 +16,10 @@ class Snake {
     return this.type;
   }
 
+  get head() {
+    return this.positions[this.positions.length - 1];
+  }
+
   turnLeft() {
     this.direction.turnLeft();
   }
@@ -31,7 +29,7 @@ class Snake {
   }
 
   move() {
-    const [headX, headY] = this.positions[this.positions.length - 1];
+    const [headX, headY] = this.head;
     this.previousTail = this.positions.shift();
 
     const [deltaX, deltaY] = this.direction.delta;
@@ -40,7 +38,9 @@ class Snake {
   }
 
   hasCrossedBoundaries() {
-    const head = this.positions[this.positions.length - 1];
-    return isHeadOutOfBoundary(head);
+    const [headX, headY] = this.head;
+    const isHeadXOutOfCols = headX < 0 || headX >= NUM_OF_COLS;
+    const isHeadYOutOfRows = headY < 0 || headY >= NUM_OF_ROWS;
+    return isHeadXOutOfCols || isHeadYOutOfRows;
   }
 }
