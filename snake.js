@@ -207,6 +207,13 @@ const runGame = game => {
   moveAndDrawSnake(game);
 };
 
+const randomlyTurnSnake = snake => {
+  let x = Math.random() * 100;
+  if (x > 50) {
+    snake.turnLeft();
+  }
+};
+
 const initSnake = () => {
   const snakePosition = [
     [40, 25],
