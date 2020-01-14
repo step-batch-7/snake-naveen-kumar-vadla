@@ -74,12 +74,21 @@ const setup = game => {
   drawFood(game.food);
 };
 
+const updateSnake = snake => {
+  eraseTail(snake);
+  drawSnake(snake);
+};
+
+const updateFood = food => {
+  drawFood(food);
+  eraseFood(food);
+};
 const runGame = game => {
   game.moveSnake();
-  eraseTail(game.snake);
-  drawSnake(game.snake);
-  drawFood(game.food);
-  eraseFood(game.food);
+  game.moveGhostSnake();
+  updateSnake(game.snake);
+  updateSnake(game.ghostSnake);
+  updateFood(game.food);
   drawScore(game.scoreCard.points);
 };
 
@@ -116,5 +125,6 @@ const main = () => {
   const game = new Game(snake, ghostSnake, food, scoreCard);
   setup(game);
 
-  setInterval(runGame, 50, game);
+  setInterval(runGame, 100, game);
+  setInterval(randomlyTurnSnake, 200, game.ghostSnake);
 };

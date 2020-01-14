@@ -26,4 +26,8 @@ class Game {
       this.scoreCard.updateDefault();
     }
   }
+
+  moveGhostSnake() {
+    this.ghostSnake.move();
+  }
 }
