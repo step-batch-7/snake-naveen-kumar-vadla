@@ -85,9 +85,10 @@ const isFoodEatenBySnake = (snakeLocation, foodLocation) => {
 };
 
 class Game {
-  constructor(snake, food) {
+  constructor(snake, food, scoreCard) {
     this.snake = snake;
     this.food = food;
+    this.scoreCard = scoreCard;
   }
 
   turnSnakeLeft() {
@@ -99,7 +100,22 @@ class Game {
     if (isFoodEatenBySnake(this.snake.location, this.food.position)) {
       this.food.generateNew();
       this.snake.grow();
+      this.scoreCard.update(1);
     }
+  }
+}
+
+class ScoreCard {
+  constructor(score) {
+    this.score = score;
+  }
+
+  get points() {
+    return this.score;
+  }
+
+  update(points) {
+    this.score += points;
   }
 }
 
@@ -107,9 +123,11 @@ const NUM_OF_COLS = 100;
 const NUM_OF_ROWS = 60;
 
 const GRID_ID = 'grid';
+const SCORE_BOARD_ID = 'scoreBoard';
 
 const getGrid = () => document.getElementById(GRID_ID);
 const getCellId = (colId, rowId) => colId + '_' + rowId;
+const getBoard = () => document.getElementById(SCORE_BOARD_ID);
 
 const getCell = (colId, rowId) =>
   document.getElementById(getCellId(colId, rowId));
@@ -149,6 +167,11 @@ const drawFood = function(food) {
   cell.classList.add('food');
 };
 
+const drawScore = function(score) {
+  const scoreCard = document.getElementById('scoreBoard');
+  scoreCard.innerText = `Score : ${score}`;
+};
+
 const eraseFood = food => {
   let [colId, rowId] = food.previousFoodLocation();
   const cell = getCell(colId, rowId);
@@ -165,6 +188,7 @@ const moveAndDrawSnake = function(game) {
   drawSnake(game.snake);
   drawFood(game.food);
   eraseFood(game.food);
+  drawScore(game.scoreCard.points);
 };
 
 const attachEventListeners = game => {
@@ -194,7 +218,8 @@ const runGame = game => {
 const main = function() {
   const snake = initSnake();
   const food = new Food(55, 25, [0, 0]);
-  const game = new Game(snake, food);
+  const scoreCard = new ScoreCard(0);
+  const game = new Game(snake, food, scoreCard);
   setup(game);
 
   setInterval(runGame, 50, game);
