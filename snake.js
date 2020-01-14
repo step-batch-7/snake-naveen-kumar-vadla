@@ -79,8 +79,9 @@ class Food {
 }
 
 class Game {
-  constructor(snake, food, scoreCard) {
+  constructor(snake, ghostSnake, food, scoreCard) {
     this.snake = snake;
+    this.ghostSnake = ghostSnake;
     this.food = food;
     this.scoreCard = scoreCard;
   }
@@ -215,11 +216,21 @@ const initSnake = () => {
   return new Snake(snakePosition, new Direction(EAST), 'snake');
 };
 
+const initGhostSnake = () => {
+  const ghostSnakePosition = [
+    [40, 30],
+    [41, 30],
+    [42, 30]
+  ];
+  return new Snake(ghostSnakePosition, new Direction(SOUTH), 'ghost');
+};
+
 const main = () => {
   const snake = initSnake();
+  const ghostSnake = initGhostSnake();
   const food = new Food(55, 25, [0, 0]);
   const scoreCard = new ScoreCard(0);
-  const game = new Game(snake, food, scoreCard);
+  const game = new Game(snake, ghostSnake, food, scoreCard);
   setup(game);
 
   setInterval(runGame, 50, game);
