@@ -78,12 +78,6 @@ class Food {
   }
 }
 
-const isFoodEatenBySnake = (snakeLocation, foodLocation) => {
-  return snakeLocation.some(part =>
-    part.every((coordinate, index) => coordinate === foodLocation[index])
-  );
-};
-
 class Game {
   constructor(snake, food, scoreCard) {
     this.snake = snake;
@@ -119,6 +113,12 @@ class ScoreCard {
   }
 }
 
+const isFoodEatenBySnake = (snakeLocation, foodLocation) => {
+  return snakeLocation.some(part =>
+    part.every((coordinate, index) => coordinate === foodLocation[index])
+  );
+};
+
 const NUM_OF_COLS = 100;
 const NUM_OF_ROWS = 60;
 
@@ -126,20 +126,20 @@ const GRID_ID = 'grid';
 const SCORE_BOARD_ID = 'scoreBoard';
 
 const getGrid = () => document.getElementById(GRID_ID);
-const getCellId = (colId, rowId) => colId + '_' + rowId;
 const getBoard = () => document.getElementById(SCORE_BOARD_ID);
 
+const getCellId = (colId, rowId) => colId + '_' + rowId;
 const getCell = (colId, rowId) =>
   document.getElementById(getCellId(colId, rowId));
 
-const createCell = function(grid, colId, rowId) {
+const createCell = (grid, colId, rowId) => {
   const cell = document.createElement('div');
   cell.className = 'cell';
   cell.id = getCellId(colId, rowId);
   grid.appendChild(cell);
 };
 
-const createGrids = function() {
+const createGrids = () => {
   const grid = getGrid();
   for (let y = 0; y < NUM_OF_ROWS; y++) {
     for (let x = 0; x < NUM_OF_COLS; x++) {
@@ -148,26 +148,20 @@ const createGrids = function() {
   }
 };
 
-const eraseTail = function(snake) {
-  let [colId, rowId] = snake.previousTail;
-  const cell = getCell(colId, rowId);
-  cell.classList.remove(snake.species);
-};
-
-const drawSnake = function(snake) {
+const drawSnake = snake => {
   snake.location.forEach(([colId, rowId]) => {
     const cell = getCell(colId, rowId);
     cell.classList.add(snake.species);
   });
 };
 
-const drawFood = function(food) {
+const drawFood = food => {
   let [colId, rowId] = food.position;
   const cell = getCell(colId, rowId);
   cell.classList.add('food');
 };
 
-const drawScore = function(score) {
+const drawScore = score => {
   const scoreCard = document.getElementById('scoreBoard');
   scoreCard.innerText = `Score : ${score}`;
 };
@@ -178,11 +172,28 @@ const eraseFood = food => {
   cell.classList.remove('food');
 };
 
+const eraseTail = snake => {
+  let [colId, rowId] = snake.previousTail;
+  const cell = getCell(colId, rowId);
+  cell.classList.remove(snake.species);
+};
+
 const handleKeyPress = game => {
   game.snake.turnLeft();
 };
 
-const moveAndDrawSnake = function(game) {
+const attachEventListeners = game => {
+  document.body.onkeydown = () => game.turnSnakeLeft();
+};
+
+const setup = game => {
+  attachEventListeners(game);
+  createGrids();
+  drawSnake(game.snake);
+  drawFood(game.food);
+};
+
+const moveAndDrawSnake = game => {
   game.moveSnake();
   eraseTail(game.snake);
   drawSnake(game.snake);
@@ -191,8 +202,8 @@ const moveAndDrawSnake = function(game) {
   drawScore(game.scoreCard.points);
 };
 
-const attachEventListeners = game => {
-  document.body.onkeydown = () => game.turnSnakeLeft();
+const runGame = game => {
+  moveAndDrawSnake(game);
 };
 
 const initSnake = () => {
@@ -204,18 +215,7 @@ const initSnake = () => {
   return new Snake(snakePosition, new Direction(EAST), 'snake');
 };
 
-const setup = game => {
-  attachEventListeners(game);
-  createGrids();
-  drawSnake(game.snake);
-  drawFood(game.food);
-};
-
-const runGame = game => {
-  moveAndDrawSnake(game);
-};
-
-const main = function() {
+const main = () => {
   const snake = initSnake();
   const food = new Food(55, 25, [0, 0]);
   const scoreCard = new ScoreCard(0);
