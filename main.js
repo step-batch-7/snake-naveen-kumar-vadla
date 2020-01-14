@@ -4,10 +4,8 @@ const NUM_OF_COLS = 100;
 const NUM_OF_ROWS = 60;
 
 const GRID_ID = 'grid';
-const SCORE_BOARD_ID = 'scoreBoard';
 
 const getGrid = () => document.getElementById(GRID_ID);
-const getBoard = () => document.getElementById(SCORE_BOARD_ID);
 
 const getCellId = (colId, rowId) => colId + '_' + rowId;
 const getCell = (colId, rowId) =>
