@@ -83,9 +83,15 @@ const updateFood = food => {
   drawFood(food);
   eraseFood(food);
 };
+
 const runGame = game => {
   game.moveSnake();
   game.moveGhostSnake();
+  if (game.isGameOver) {
+    clearInterval(gameAnimation);
+    clearInterval(randomTurn);
+    return;
+  }
   updateSnake(game.snake);
   updateSnake(game.ghostSnake);
   updateFood(game.food);
@@ -117,6 +123,8 @@ const initGhostSnake = () => {
   return new Snake(ghostSnakePosition, new Direction(SOUTH), 'ghost');
 };
 
+let gameAnimation, randomTurn;
+
 const main = () => {
   const snake = initSnake();
   const ghostSnake = initGhostSnake();
@@ -125,6 +133,6 @@ const main = () => {
   const game = new Game(snake, ghostSnake, food, scoreCard);
   setup(game);
 
-  setInterval(runGame, 100, game);
-  setInterval(randomlyTurnSnake, 200, game.ghostSnake);
+  gameAnimation = setInterval(runGame, 100, game);
+  randomTurn = setInterval(randomlyTurnSnake, 200, game.ghostSnake);
 };

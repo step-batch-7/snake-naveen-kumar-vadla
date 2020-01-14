@@ -12,6 +12,7 @@ class Game {
     this.ghostSnake = ghostSnake;
     this.food = food;
     this.scoreCard = scoreCard;
+    this.isGameOver = false;
   }
 
   turnSnakeLeft() {
@@ -20,6 +21,7 @@ class Game {
 
   moveSnake() {
     this.snake.move();
+    this.isGameOver = this.snake.hasCrossedBoundaries();
     if (isFoodEatenBySnake(this.snake.location, this.food.position)) {
       this.food.generateNew();
       this.snake.grow();
