@@ -31,5 +31,8 @@ class Game {
 
   moveGhostSnake() {
     this.ghostSnake.move();
+    if (isFoodEatenBySnake(this.ghostSnake.location, this.food.position)) {
+      this.food.generateNew();
+    }
   }
 }
