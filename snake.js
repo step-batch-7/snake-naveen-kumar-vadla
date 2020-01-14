@@ -154,6 +154,7 @@ const eraseFood = food => {
   const cell = getCell(colId, rowId);
   cell.classList.remove('food');
 };
+
 const handleKeyPress = game => {
   game.snake.turnLeft();
 };
