@@ -84,12 +84,21 @@ const updateFood = food => {
   eraseFood(food);
 };
 
+const gameOver = () => {
+  document.body.removeChild(getGrid());
+  const gameOver = document.createElement('div');
+  gameOver.innerText = 'Game Over';
+  gameOver.className = 'gameOver';
+  document.body.appendChild(gameOver);
+};
+
 const runGame = game => {
   game.moveSnake();
   game.moveGhostSnake();
   if (game.isGameOver) {
     clearInterval(gameAnimation);
     clearInterval(randomTurn);
+    gameOver();
     return;
   }
   updateSnake(game.snake);
