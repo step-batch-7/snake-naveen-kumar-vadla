@@ -95,7 +95,7 @@ class Game {
     if (isFoodEatenBySnake(this.snake.location, this.food.position)) {
       this.food.generateNew();
       this.snake.grow();
-      this.scoreCard.update(1);
+      this.scoreCard.updateDefault();
     }
   }
 }
@@ -109,8 +109,8 @@ class ScoreCard {
     return this.score;
   }
 
-  update(points) {
-    this.score += points;
+  updateDefault() {
+    this.score++;
   }
 }
 
