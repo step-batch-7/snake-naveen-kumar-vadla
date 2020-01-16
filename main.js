@@ -57,8 +57,8 @@ const eraseTail = snake => {
   cell.classList.remove(snake.species);
 };
 
-const handleKeyPress = game => {
-  game.snake.turnLeft();
+const handleKeyPress = ({ snake }) => {
+  snake.turnLeft();
 };
 
 const attachEventListeners = game => {
@@ -68,8 +68,9 @@ const attachEventListeners = game => {
 const setup = game => {
   attachEventListeners(game);
   createGrids();
-  drawSnake(game.snake);
-  drawFood(game.food);
+  const { snake, food } = game;
+  drawSnake(snake);
+  drawFood(food);
 };
 
 const updateSnake = snake => {
@@ -83,6 +84,8 @@ const updateFood = food => {
 };
 
 const gameOver = () => {
+  clearInterval(gameAnimation);
+  clearInterval(randomTurn);
   document.body.removeChild(getGrid());
   const gameOver = document.createElement('div');
   gameOver.innerText = 'Game Over';
@@ -93,16 +96,15 @@ const gameOver = () => {
 const runGame = game => {
   game.moveSnake();
   game.moveGhostSnake();
-  if (game.isGameOver) {
-    clearInterval(gameAnimation);
-    clearInterval(randomTurn);
+  const { isGameOver, snake, ghostSnake, food, scoreCard } = game;
+  if (isGameOver) {
     gameOver();
     return;
   }
-  updateSnake(game.snake);
-  updateSnake(game.ghostSnake);
-  updateFood(game.food);
-  drawScore(game.scoreCard.points);
+  updateSnake(snake);
+  updateSnake(ghostSnake);
+  updateFood(food);
+  drawScore(scoreCard.points);
 };
 
 const randomlyTurnSnake = snake => {
