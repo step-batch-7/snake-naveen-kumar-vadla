@@ -1,17 +1,13 @@
 'use strict';
 
-const isFoodEatenBySnake = ([headX, headY], [foodX, foodY]) => {
+const isFoodEatenBySnake = (snakeHead, foodPosition) => {
+  const [headX, headY] = snakeHead;
+  const [foodX, foodY] = foodPosition;
   return headX == foodX && headY == foodY;
 };
 
 class Game {
-  constructor(
-    snake,
-    ghostSnake,
-    food,
-    scoreCard,
-    { NUM_OF_COLS, NUM_OF_ROWS }
-  ) {
+  constructor(snake, ghostSnake, food, scoreCard, NUM_OF_COLS, NUM_OF_ROWS) {
     this.snake = snake;
     this.ghostSnake = ghostSnake;
     this.food = food;
@@ -30,7 +26,7 @@ class Game {
     this.isGameOver =
       this.snake.isTouchedItself() || this.isSnakeCrossedBoundaries();
     if (isFoodEatenBySnake(this.snake.head, this.food.position)) {
-      this.food.generateNew();
+      this.food.generateNew(this.NUM_OF_COLS, this.NUM_OF_ROWS);
       this.snake.grow();
       this.scoreCard.updateDefault();
     }
@@ -39,7 +35,8 @@ class Game {
   moveGhostSnake() {
     this.ghostSnake.move();
     if (isFoodEatenBySnake(this.ghostSnake.head, this.food.position)) {
-      this.food.generateNew();
+      this.food.generateNew(this.NUM_OF_COLS, this.NUM_OF_ROWS);
+      this.ghostSnake.grow();
     }
   }
 

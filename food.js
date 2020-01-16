@@ -11,7 +11,7 @@ class Food {
     return [this.colId, this.rowId];
   }
 
-  generateNew() {
+  generateNew(NUM_OF_COLS, NUM_OF_ROWS) {
     this.previousLocation = this.position;
     this.colId = Math.floor(Math.random() * NUM_OF_COLS);
     this.rowId = Math.floor(Math.random() * NUM_OF_ROWS);

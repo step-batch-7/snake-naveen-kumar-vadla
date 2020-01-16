@@ -139,10 +139,14 @@ const main = () => {
   const ghostSnake = initGhostSnake();
   const food = new Food(55, 25, [0, 0]);
   const scoreCard = new ScoreCard(0);
-  const game = new Game(snake, ghostSnake, food, scoreCard, {
+  const game = new Game(
+    snake,
+    ghostSnake,
+    food,
+    scoreCard,
     NUM_OF_COLS,
     NUM_OF_ROWS
-  });
+  );
   setup(game);
 
   gameAnimation = setInterval(runGame, 100, game);
