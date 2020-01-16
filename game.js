@@ -29,7 +29,8 @@ class Game {
 
   moveSnake() {
     this.snake.move();
-    this.isGameOver = this.isSnakeCrossedBoundaries();
+    this.isGameOver =
+      this.snake.isTouchedItself() || this.isSnakeCrossedBoundaries();
     if (isFoodEatenBySnake(this.snake.location, this.food.position)) {
       this.food.generateNew();
       this.snake.grow();

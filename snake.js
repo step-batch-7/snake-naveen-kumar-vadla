@@ -36,4 +36,12 @@ class Snake {
 
     this.positions.push([headX + deltaX, headY + deltaY]);
   }
+
+  isTouchedItself() {
+    const body = this.positions.slice(0, -1);
+    return body.some(([partX, partY]) => {
+      const [headX, headY] = this.head;
+      return headX == partX && headY == partY;
+    });
+  }
 }
