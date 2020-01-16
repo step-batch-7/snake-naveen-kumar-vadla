@@ -1,9 +1,7 @@
 'use strict';
 
-const isFoodEatenBySnake = (snakeLocation, foodLocation) => {
-  return snakeLocation.some(part =>
-    part.every((coordinate, index) => coordinate === foodLocation[index])
-  );
+const isFoodEatenBySnake = ([headX, headY], [foodX, foodY]) => {
+  return headX == foodX && headY == foodY;
 };
 
 class Game {
@@ -31,7 +29,7 @@ class Game {
     this.snake.move();
     this.isGameOver =
       this.snake.isTouchedItself() || this.isSnakeCrossedBoundaries();
-    if (isFoodEatenBySnake(this.snake.location, this.food.position)) {
+    if (isFoodEatenBySnake(this.snake.head, this.food.position)) {
       this.food.generateNew();
       this.snake.grow();
       this.scoreCard.updateDefault();
@@ -40,7 +38,7 @@ class Game {
 
   moveGhostSnake() {
     this.ghostSnake.move();
-    if (isFoodEatenBySnake(this.ghostSnake.location, this.food.position)) {
+    if (isFoodEatenBySnake(this.ghostSnake.head, this.food.position)) {
       this.food.generateNew();
     }
   }
