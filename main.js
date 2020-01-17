@@ -95,8 +95,8 @@ const gameOver = () => {
 const runGame = game => {
   game.moveSnake();
   game.moveGhostSnake();
-  const { isGameOver, snake, ghostSnake, food, scoreCard } = game;
-  if (isGameOver) {
+  const { snake, ghostSnake, food, scoreCard } = game;
+  if (game.isGameOver()) {
     gameOver();
     return;
   }

@@ -12,7 +12,6 @@ class Game {
     this.ghostSnake = ghostSnake;
     this.food = food;
     this.scoreCard = scoreCard;
-    this.isGameOver = false;
     this.NUM_OF_COLS = NUM_OF_COLS;
     this.NUM_OF_ROWS = NUM_OF_ROWS;
   }
@@ -23,10 +22,6 @@ class Game {
 
   moveSnake() {
     this.snake.move();
-    this.isGameOver =
-      this.isSnakeTouchedGhostSnake() ||
-      this.snake.isTouchedItself() ||
-      this.isSnakeCrossedBoundaries();
     if (isFoodEatenBySnake(this.snake.head, this.food.position)) {
       this.food.generateNew(this.NUM_OF_COLS, this.NUM_OF_ROWS);
       this.snake.grow();
@@ -40,6 +35,14 @@ class Game {
       this.food.generateNew(this.NUM_OF_COLS, this.NUM_OF_ROWS);
       this.ghostSnake.grow();
     }
+  }
+
+  isGameOver() {
+    return (
+      this.isSnakeCrossedBoundaries() ||
+      this.snake.isTouchedItself() ||
+      this.isSnakeTouchedGhostSnake()
+    );
   }
 
   isSnakeCrossedBoundaries() {
