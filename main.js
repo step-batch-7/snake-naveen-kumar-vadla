@@ -86,7 +86,6 @@ const updateFood = food => {
 const gameOver = () => {
   clearInterval(gameAnimation);
   clearInterval(randomTurn);
-  document.body.removeChild(getGrid());
   const gameOver = document.createElement('div');
   gameOver.innerText = 'Game Over';
   gameOver.className = 'gameOver';
