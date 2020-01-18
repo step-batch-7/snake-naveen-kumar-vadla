@@ -3,7 +3,7 @@
 const isFoodEatenBySnake = (snakeHead, foodPosition) => {
   const [headX, headY] = snakeHead;
   const [foodX, foodY] = foodPosition;
-  return headX == foodX && headY == foodY;
+  return headX === foodX && headY === foodY;
 };
 
 class Game {
@@ -41,7 +41,7 @@ class Game {
     return (
       this.isSnakeCrossedBoundaries() ||
       this.snake.isTouchedItself() ||
-      this.isSnakeTouchedGhostSnake()
+      this.areSnakesTouchedEachOther()
     );
   }
 
@@ -52,11 +52,13 @@ class Game {
     return isHeadXOutOfCols || isHeadYOutOfRows;
   }
 
-  isSnakeTouchedGhostSnake() {
-    const [snakeHeadX, snakeHeadY] = this.snake.head;
+  areSnakesTouchedEachOther() {
+    const snakeBody = this.snake.location;
     const ghostSnakeBody = this.ghostSnake.location;
-    return ghostSnakeBody.some(([partX, partY]) => {
-      return partX == snakeHeadX && partY == snakeHeadY;
+    return snakeBody.some(([snakeX, snakeY]) => {
+      return ghostSnakeBody.some(([ghostSnakeX, ghostSnakeY]) => {
+        return snakeX === ghostSnakeX && snakeY === ghostSnakeY;
+      });
     });
   }
 }
