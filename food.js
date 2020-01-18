@@ -1,10 +1,11 @@
 'use strict';
 
 class Food {
-  constructor(colId, rowId, previousLocation) {
+  constructor(colId, rowId, previousLocation, type) {
     this.colId = colId;
     this.rowId = rowId;
     this.previousLocation = previousLocation;
+    this.type = type;
   }
 
   get position() {

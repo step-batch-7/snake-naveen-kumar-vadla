@@ -37,7 +37,7 @@ const drawSnake = snake => {
 const drawFood = food => {
   let [colId, rowId] = food.position;
   const cell = getCell(colId, rowId);
-  cell.classList.add('food');
+  cell.classList.add(food.type);
 };
 
 const drawScore = score => {
@@ -48,7 +48,7 @@ const drawScore = score => {
 const eraseFood = food => {
   let [colId, rowId] = food.previousFoodLocation();
   const cell = getCell(colId, rowId);
-  cell.classList.remove('food');
+  cell.classList.remove(food.type);
 };
 
 const eraseTail = snake => {
@@ -136,7 +136,7 @@ let gameAnimation, randomTurn;
 const main = () => {
   const snake = initSnake();
   const ghostSnake = initGhostSnake();
-  const food = new Food(42, 31, [0, 0]);
+  const food = new Food(42, 31, [0, 0], 'food');
   const scoreCard = new ScoreCard(0);
   const game = new Game(
     snake,
