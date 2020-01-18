@@ -22,5 +22,10 @@
 --DONE-- * If snake touches itself or the walls, the game should be over
 --DONE-- * Add a scoring mechanism
 
+Advanced features 
+--DONE-- 1. Give the ghost snake the ability to eat the food.
+--DONE-- 2. The game ends when your snake touches the ghost snake.
+3. Provide a special type of food that increases the score without changing the length of the snake.
 
+Other Tasks:
 --DONE-- * extract all class into individual files

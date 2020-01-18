@@ -136,7 +136,7 @@ let gameAnimation, randomTurn;
 const main = () => {
   const snake = initSnake();
   const ghostSnake = initGhostSnake();
-  const food = new Food(55, 25, [0, 0]);
+  const food = new Food(42, 31, [0, 0]);
   const scoreCard = new ScoreCard(0);
   const game = new Game(
     snake,
