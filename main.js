@@ -7,7 +7,7 @@ const GRID_ID = 'grid';
 
 const getGrid = () => document.getElementById(GRID_ID);
 
-const getCellId = (colId, rowId) => colId + '_' + rowId;
+const getCellId = (colId, rowId) => `${colId}'_'${rowId}`;
 const getCell = (colId, rowId) =>
   document.getElementById(getCellId(colId, rowId));
 
