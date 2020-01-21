@@ -85,7 +85,6 @@ const updateFood = food => {
 
 const gameOver = () => {
   clearInterval(gameAnimation);
-  clearInterval(randomTurn);
   const gameOver = document.createElement('div');
   gameOver.innerText = 'Game Over';
   gameOver.className = 'gameOver';
@@ -131,12 +130,12 @@ const initGhostSnake = () => {
   return new Snake(ghostSnakePosition, new Direction(SOUTH), 'ghost');
 };
 
-let gameAnimation, randomTurn;
+let gameAnimation;
 
 const main = () => {
   const snake = initSnake();
   const ghostSnake = initGhostSnake();
-  const food = new Food(42, 31, [0, 0], 'food');
+  const food = new Food(55, 25, [0, 0], 'food');
   const scoreCard = new ScoreCard(0);
   const game = new Game(
     snake,
@@ -148,6 +147,8 @@ const main = () => {
   );
   setup(game);
 
-  gameAnimation = setInterval(runGame, 100, game);
-  randomTurn = setInterval(randomlyTurnSnake, 200, game.ghostSnake);
+  gameAnimation = setInterval(() => {
+    runGame(game);
+    randomlyTurnSnake(game.ghostSnake);
+  }, 100);
 };
