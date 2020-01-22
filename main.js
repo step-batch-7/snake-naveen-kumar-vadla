@@ -83,25 +83,33 @@ const updateFood = food => {
   eraseFood(food);
 };
 
+const createNewGrid = () => {
+  document.body.removeChild(getGrid());
+  const grid = document.createElement('div');
+  grid.className = GRID_ID;
+  grid.id = GRID_ID;
+  document.body.appendChild(grid);
+};
+
 const restart = () => {
   drawScore(0);
   clearInterval(gameAnimation);
   const gameOverElement = document.getElementById('gameOver');
-  if (gameOverElement) document.body.removeChild(gameOverElement);
-  document.body.removeChild(getGrid());
-  const grid = document.createElement('div');
-  grid.id = GRID_ID;
-  document.body.appendChild(grid);
+  if (gameOverElement)
+    document.getElementById(GRID_ID).removeChild(gameOverElement);
+  createNewGrid();
   main();
 };
 
 const gameOver = () => {
   clearInterval(gameAnimation);
-  const gameOver = document.createElement('div');
-  gameOver.innerText = 'Game Over';
-  gameOver.className = 'gameOver';
+  const gameOver = document.createElement('img');
+  gameOver.src = 'https://s3.envato.com/files/146041329/game%20over.jpg';
+  gameOver.classList.add('gameOver');
   gameOver.id = 'gameOver';
-  document.body.appendChild(gameOver);
+  createNewGrid();
+  const grid = getGrid();
+  grid.appendChild(gameOver);
 };
 
 const runGame = game => {
