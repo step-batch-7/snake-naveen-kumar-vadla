@@ -5,14 +5,14 @@
 
 #container {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  margin: 0 auto;
+  margin-top: 30px;
 }
 
 #restart {
   width: 5vw;
   height: 2vw;
-  margin: 0 auto;
   border-radius: 10px;
   background-color: cadetblue;
   border: 1px solid black;
@@ -21,7 +21,6 @@
 #quit {
   width: 5vw;
   height: 2vw;
-  margin: 0 auto;
   border-radius: 10px;
   background-color: cadetblue;
   border: 1px solid black;
