@@ -83,10 +83,7 @@ const updateFood = food => {
   eraseFood(food);
 };
 
-const clearGrid = () => {
-  const grid = getGrid();
-  grid.innerHTML = '';
-};
+const clearGrid = () => getGrid().innerHTML = '';
 
 const clearIntervals = () => {
   clearInterval(gameAnimation);
@@ -95,21 +92,20 @@ const clearIntervals = () => {
 
 const restart = () => {
   drawScore(0);
-  clearIntervals();
+  gameOver();
   const gameOverElement = document.getElementById('gameOver');
   if (gameOverElement)
     document.getElementById(GRID_ID).removeChild(gameOverElement);
-  clearGrid();
   main();
 };
 
 const gameOver = () => {
   clearIntervals();
+  clearGrid();
   const gameOver = document.createElement('img');
   gameOver.src = './images/game-over.jpg';
   gameOver.className = 'gameOver';
   gameOver.id = 'gameOver';
-  clearGrid();
   const grid = getGrid();
   grid.appendChild(gameOver);
 };
