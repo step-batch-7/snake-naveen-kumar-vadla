@@ -83,7 +83,7 @@ const updateFood = food => {
   eraseFood(food);
 };
 
-const clearGrid = () => getGrid().innerHTML = '';
+const clearGrid = () => (getGrid().innerHTML = '');
 
 const clearIntervals = () => {
   clearInterval(gameAnimation);
@@ -146,12 +146,19 @@ const initGhostSnake = () => {
   return new Snake(ghostSnakePosition, new Direction(SOUTH), 'ghost');
 };
 
+const getRandomRowCol = () => {
+  const row = Math.floor(Math.random() * NUM_OF_ROWS - 1);
+  const col = Math.floor(Math.random() * NUM_OF_COLS - 1);
+  return [row, col];
+};
+
 let gameAnimation, randomTurn;
 
 const main = () => {
   const snake = initSnake();
   const ghostSnake = initGhostSnake();
-  const food = new Food(55, 25, [0, 0], 'food');
+  const [row, col] = getRandomRowCol();
+  const food = new Food(col, row, [0, 0], 'food');
   const scoreCard = new ScoreCard(0);
   const game = new Game(
     snake,
