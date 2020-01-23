@@ -104,8 +104,8 @@ const restart = () => {
 const gameOver = () => {
   clearInterval(gameAnimation);
   const gameOver = document.createElement('img');
-  gameOver.src = 'https://s3.envato.com/files/146041329/game%20over.jpg';
-  gameOver.classList.add('gameOver');
+  gameOver.src = './images/game-over.jpg';
+  gameOver.className = 'gameOver';
   gameOver.id = 'gameOver';
   createNewGrid();
   const grid = getGrid();
@@ -116,10 +116,7 @@ const runGame = game => {
   game.moveSnake();
   game.moveGhostSnake();
   const { snake, ghostSnake, food, scoreCard } = game;
-  if (game.isGameOver()) {
-    gameOver();
-    return;
-  }
+  if (game.isGameOver()) return gameOver();
   updateSnake(snake);
   updateSnake(ghostSnake);
   updateFood(food);
