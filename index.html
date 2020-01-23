@@ -12,10 +12,15 @@
     <script src="scoreCard.js"></script>
   </head>
 
-  <body onload="main()" background="https://ewhenson.files.wordpress.com/2016/01/backgrounds-dark-green-textures-2857798-1920x1080.jpg" style="background-size: cover">
+  <body onload="main()"
+    background="https://ewhenson.files.wordpress.com/2016/01/backgrounds-dark-green-textures-2857798-1920x1080.jpg"
+    style="background-size: cover">
     <h1 class="main-heading ">Snake Game</h1>
-    <button onclick="restart()">Restart</button>
-    <div id="scoreBoard">Score : 0</div>
+    <div id="container">
+      <button onclick="restart()" id="restart">Restart</button>
+      <div id="scoreBoard">Score : 0</div>
+      <button onclick="gameOver()" id="quit">Quit</button>
+    </div>
     <div id="grid"></div>
   </body>
 

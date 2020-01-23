@@ -168,5 +168,5 @@ const main = () => {
   setup(game);
 
   gameAnimation = setInterval(runGame, 50, game);
-  randomTurn = setInterval(randomlyTurnSnake, 500, game.ghostSnake);
+  randomTurn = setInterval(randomlyTurnSnake, 100, game.ghostSnake);
 };

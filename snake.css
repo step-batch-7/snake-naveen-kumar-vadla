@@ -3,6 +3,34 @@
   color: rgba(0, 0, 255, 0.781);
 }
 
+#container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+#restart {
+  width: 5vw;
+  height: 2vw;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: cadetblue;
+  border: 1px solid black;
+}
+
+#quit {
+  width: 5vw;
+  height: 2vw;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: cadetblue;
+  border: 1px solid black;
+}
+
+button:focus {
+  outline: none;
+}
+
 #grid {
   width: 800px;
   height: 480px;
