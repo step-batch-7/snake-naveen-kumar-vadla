@@ -1,6 +1,7 @@
 .main-heading {
   text-align: center;
-  color: rgba(0, 0, 255, 0.781);
+  color: whitesmoke;
+  text-shadow: 3px 2px rgb(255, 0, 0);
 }
 
 #container {
@@ -10,18 +11,10 @@
   margin-top: 30px;
 }
 
-#restart {
-  width: 5vw;
-  height: 2vw;
-  border-radius: 10px;
-  background-color: cadetblue;
-  border: 1px solid black;
-}
-
-#quit {
-  width: 5vw;
-  height: 2vw;
-  border-radius: 10px;
+#restart,#quit{
+  width: 100px;
+  height: 30px;
+  border-radius: 15px;
   background-color: cadetblue;
   border: 1px solid black;
 }
