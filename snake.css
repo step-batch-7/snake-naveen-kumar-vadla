@@ -1,5 +1,6 @@
 .main-heading {
   text-align: center;
+  color: rgba(0, 0, 255, 0.781);
 }
 
 #grid {
@@ -9,6 +10,7 @@
   margin: 0 auto;
   flex-wrap: wrap;
   border: 1px solid black;
+  background-color: rgba(0, 255, 0, 0.27);
 }
 
 #scoreBoard {
@@ -20,6 +22,7 @@
   border: 1px solid black;
   text-align: center;
   border-radius: 5px;
+  background-color: rgba(128, 128, 128, 0.671);
 }
 
 .cell {
@@ -49,5 +52,5 @@
   text-align: center;
   width: 800px;
   height: 480px;
-  margin:0; 
+  margin: 0;
 }

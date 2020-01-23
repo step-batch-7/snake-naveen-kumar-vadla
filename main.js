@@ -83,31 +83,33 @@ const updateFood = food => {
   eraseFood(food);
 };
 
-const createNewGrid = () => {
-  document.body.removeChild(getGrid());
-  const grid = document.createElement('div');
-  grid.className = GRID_ID;
-  grid.id = GRID_ID;
-  document.body.appendChild(grid);
+const clearGrid = () => {
+  const grid = getGrid();
+  grid.innerHTML = '';
+};
+
+const clearIntervals = () => {
+  clearInterval(gameAnimation);
+  clearInterval(randomTurn);
 };
 
 const restart = () => {
   drawScore(0);
-  clearInterval(gameAnimation);
+  clearIntervals();
   const gameOverElement = document.getElementById('gameOver');
   if (gameOverElement)
     document.getElementById(GRID_ID).removeChild(gameOverElement);
-  createNewGrid();
+  clearGrid();
   main();
 };
 
 const gameOver = () => {
-  clearInterval(gameAnimation);
+  clearIntervals();
   const gameOver = document.createElement('img');
   gameOver.src = './images/game-over.jpg';
   gameOver.className = 'gameOver';
   gameOver.id = 'gameOver';
-  createNewGrid();
+  clearGrid();
   const grid = getGrid();
   grid.appendChild(gameOver);
 };
@@ -148,7 +150,7 @@ const initGhostSnake = () => {
   return new Snake(ghostSnakePosition, new Direction(SOUTH), 'ghost');
 };
 
-let gameAnimation;
+let gameAnimation, randomTurn;
 
 const main = () => {
   const snake = initSnake();
@@ -165,8 +167,6 @@ const main = () => {
   );
   setup(game);
 
-  gameAnimation = setInterval(() => {
-    runGame(game);
-    randomlyTurnSnake(game.ghostSnake);
-  }, 100);
+  gameAnimation = setInterval(runGame, 50, game);
+  randomTurn = setInterval(randomlyTurnSnake, 500, game.ghostSnake);
 };
