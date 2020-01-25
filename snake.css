@@ -1,3 +1,9 @@
+body {
+  background-image: url('./images/back-ground.jpg');
+  background-size: 'cover';
+  font-family: sans-serif;
+}
+
 .main-heading {
   text-align: center;
   color: whitesmoke;
@@ -10,7 +16,8 @@
   margin-top: 30px;
 }
 
-#restart,#quit{
+#restart,
+#quit {
   width: 100px;
   height: 30px;
   border-radius: 15px;
@@ -29,7 +36,8 @@ button:focus {
   background-color: rgba(0, 255, 0, 0.3);
 }
 
-#grid,.gameOver {
+#grid,
+.gameOver {
   width: 800px;
   height: 480px;
   margin: 0 auto;

@@ -170,6 +170,6 @@ const main = () => {
   );
   setup(game);
 
-  gameAnimation = setInterval(runGame, 50, game);
+  gameAnimation = setInterval(runGame, 75, game);
   randomTurn = setInterval(randomlyTurnSnake, 100, game.ghostSnake);
 };
