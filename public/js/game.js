@@ -6,6 +6,18 @@ const isFoodEatenBySnake = (snakeHead, foodPosition) => {
   return headX === foodX && headY === foodY;
 };
 
+const isSnakeCrossedBoundaries = (
+  snake,
+  NUM_OF_COLS,
+  NUM_OF_ROWS,
+  startingPoint
+) => {
+  const [headX, headY] = snake.head;
+  const isHeadXOutOfCols = headX < startingPoint || headX >= NUM_OF_COLS;
+  const isHeadYOutOfRows = headY < startingPoint || headY >= NUM_OF_ROWS;
+  return isHeadXOutOfCols || isHeadYOutOfRows;
+};
+
 class Game {
   constructor(snake, ghostSnake, food, scoreCard, NUM_OF_COLS, NUM_OF_ROWS) {
     this.snake = snake;
@@ -35,21 +47,30 @@ class Game {
       this.food.generateNew(this.NUM_OF_COLS, this.NUM_OF_ROWS);
       this.ghostSnake.grow();
     }
+    const isGhostSnakeAtBoundary = isSnakeCrossedBoundaries(
+      this.ghostSnake,
+      this.NUM_OF_COLS - 1,
+      this.NUM_OF_ROWS - 1,
+      1
+    );
+    if (isGhostSnakeAtBoundary) {
+      this.ghostSnake.turnLeft();
+      this.ghostSnake.turnLeft();
+    }
   }
 
   isGameOver() {
+    const isSnakeCrossedBoundary = isSnakeCrossedBoundaries(
+      this.snake,
+      this.NUM_OF_COLS,
+      this.NUM_OF_ROWS,
+      0
+    );
     return (
-      this.isSnakeCrossedBoundaries() ||
+      isSnakeCrossedBoundary ||
       this.snake.isTouchedItself() ||
       this.areSnakesTouchedEachOther()
     );
-  }
-
-  isSnakeCrossedBoundaries() {
-    const [headX, headY] = this.snake.head;
-    const isHeadXOutOfCols = headX < 0 || headX >= this.NUM_OF_COLS;
-    const isHeadYOutOfRows = headY < 0 || headY >= this.NUM_OF_ROWS;
-    return isHeadXOutOfCols || isHeadYOutOfRows;
   }
 
   areSnakesTouchedEachOther() {
